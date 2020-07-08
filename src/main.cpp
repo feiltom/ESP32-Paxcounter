@@ -250,6 +250,20 @@ void setup() {
                           0);           // CPU core
 #endif
 
+#if (HAS_GSM)
+  strcat_P(features, " GSM");
+  if (gsm_init()) {
+    ESP_LOGI(TAG, "Starting GSM Feed...");
+    xTaskCreatePinnedToCore(gsmLoop,  // task function
+                            "gsmloop", // name of task
+                            2048,      // stack size of task
+                            (void *)1, // parameter of the task
+                            1,         // priority of the task
+                            &gsmLoopTask,  // task handle
+                            1);        // CPU core
+  }
+#endif
+
 // initialize wifi antenna
 #ifdef HAS_ANTENNA_SWITCH
   strcat_P(features, " ANT");

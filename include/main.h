@@ -21,5 +21,10 @@
 #if (HAS_LORA)
 #include "lorawan.h"
 #endif
+
+#if (HAS_GSM)
+#include "gsm.h"
+#endif
+
 #include "timekeeper.h"
 #endif
